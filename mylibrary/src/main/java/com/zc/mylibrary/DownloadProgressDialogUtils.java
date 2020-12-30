@@ -14,7 +14,7 @@ public class DownloadProgressDialogUtils {
 
     public static void showProgressDialog(Context mContext, String message) {
         closeProgressDialog();
-        progressDialog = new ProgressDialog(mContext);
+        progressDialog = new ProgressDialog(mContext,R.style.Theme_MaterialComponents_Light_Dialog);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage(message);
         progressDialog.setCancelable(true);
