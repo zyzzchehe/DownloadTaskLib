@@ -167,6 +167,7 @@ public class DownloadApkTask extends AsyncTask<String, Float, String> {
         Log.i(TAG, "onPostExecute: apk save path = " + s);
         DownloadProgressDialogUtils.closeProgressDialog();
         Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
         File apkFile = new File(s);
         try {
             //兼容7.0
