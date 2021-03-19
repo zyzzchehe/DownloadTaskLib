@@ -27,6 +27,21 @@ public class DownloadProgressDialogUtils {
         }
     }
 
+    public static void showCircleProgressDialog(int maxValue,Context mContext, String message) {
+        closeProgressDialog();
+        progressDialog = new ProgressDialog(mContext,R.style.Theme_MaterialComponents_Light_Dialog);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMax(maxValue);
+        if (null != progressDialog
+                && !progressDialog.isShowing()
+                && !((Activity)mContext).isFinishing()) {//检查activity是否finishing!!!
+            progressDialog.show();
+        }
+    }
+
     public static void updateProgress(float value){
         progressDialog.setProgress((int) value);
     }
