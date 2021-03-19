@@ -33,7 +33,7 @@ public class DownloadProgressDialogUtils {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage(message);
         progressDialog.setCancelable(true);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(maxValue);
         if (null != progressDialog
                 && !progressDialog.isShowing()
