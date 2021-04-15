@@ -43,7 +43,9 @@ public class DownloadProgressDialogUtils {
     }
 
     public static void updateProgress(float value){
-        progressDialog.setProgress((int) value);
+        if(null != progressDialog){
+            progressDialog.setProgress((int) value);
+        }
     }
 
     public static void closeProgressDialog() {
