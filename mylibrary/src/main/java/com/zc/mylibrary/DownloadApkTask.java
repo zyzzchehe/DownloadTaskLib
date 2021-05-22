@@ -171,7 +171,7 @@ public class DownloadApkTask extends AsyncTask<String, Float, String> {
         File apkFile = new File(s);
         try {
             //兼容7.0
-            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider", apkFile);
                 intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
@@ -189,37 +189,7 @@ public class DownloadApkTask extends AsyncTask<String, Float, String> {
             }
             if (context.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
                 context.startActivity(intent);
-            }*/
-            new Thread() {
-                public void run() {
-                    Process process;
-                    InputStream in = null;
-                    try {
-                        process = Runtime.getRuntime().exec("pm install -r " + s + "\n");
-                        in = process.getInputStream();
-                        int len;
-                        byte[] bs = new byte[256];
-                        while (-1 != (len = in.read(bs))) {
-                            String state = new String(bs, 0, len);
-                            Log.i(TAG, "run: install state = "+state);
-                            if (state.equals("Success\n")) {
-                                Log.i(TAG, "run: install ok");
-                            }
-                        }
-                        apkFile.delete();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (in != null) {
-                                in.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }.start();
+            }
         } catch (Throwable e) {
             e.printStackTrace();
         }
