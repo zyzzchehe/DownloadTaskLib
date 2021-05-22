@@ -14,6 +14,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
+import com.zc.commonutilslib.MLog;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
@@ -164,7 +166,7 @@ public class DownloadApkTask extends AsyncTask<String, Float, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.i(TAG, "onPostExecute: apk save path = " + s);
+        MLog.i(TAG, "onPostExecute: apk save path = " + s);
         DownloadProgressDialogUtils.closeProgressDialog();
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
@@ -184,8 +186,9 @@ public class DownloadApkTask extends AsyncTask<String, Float, String> {
                     }
                 }
             } else {
+                MLog.i(TAG, "onPostExecute: start install apk");
                 intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             if (context.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
                 context.startActivity(intent);
